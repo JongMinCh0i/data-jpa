@@ -25,7 +25,7 @@ class MemberRepositoryTest {
         Member member = new Member("memberA");
         Member savedMember = memberRepository.save(member);
 
-        Member findMember = memberRepository.findById(member.getId()).get();
+        Member findMember = memberRepository.findById(savedMember.getId()).get();
 
         Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
         Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
@@ -61,5 +61,26 @@ class MemberRepositoryTest {
 
         long deletedCount = memberRepository.count();
         assertThat(deletedCount).isEqualTo(0);
+    }
+
+    @Test
+    public void findByUsernameAndAgeGreaterThen() {
+        Member m1 = new Member("AAA", 10);
+        Member m2 = new Member("BBB", 20);
+
+        memberRepository.save(m1);
+        memberRepository.save(m2);
+
+        List<Member> result = memberRepository.findByUsernameAndAgeGreaterThan(m2 .getUsername(), 15);
+
+        assertThat(result.get(0).getUsername()).isEqualTo("BBB");
+        assertThat(result.get(0).getAge()).isEqualTo(20);
+        assertThat(result.size()).isEqualTo(1);
+
+    }
+
+    @Test
+    public void findHelloBy() {
+        List<Member> top3HelloBy = memberRepository.findTop3HelloBy();
     }
 }
