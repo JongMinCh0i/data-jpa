@@ -1,4 +1,4 @@
-package study.datajpa.repository;
+package study.datajpa.dto;
 
 
 import lombok.Data;
