@@ -29,7 +29,7 @@ public class Member extends BaseEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    public Member(String usernameww) {
+    public Member(String username) {
         this.username = username;
     }
 
